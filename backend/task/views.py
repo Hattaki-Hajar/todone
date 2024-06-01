@@ -11,13 +11,14 @@ from .serializers import TaskSerializer
 @api_view(['POST'])
 def add_task(request):
 	data = request.data
-	if not ('title' in data.keys() and 'done' in data.keys() and 'description' in data.keys()):
+	print('in adding: ', data)
+	if not ('title' in data.keys() and 'description' in data.keys()):
 		return Response(data="missing key", status=status.HTTP_400_BAD_REQUEST)
-	if data['title'] and data['description'] and data['done']:
+	if data['title'] and data['description']:
 		task = Task(
 			title=data['title'],
 			description=data['description'],
-			done=data['done'],
+			done=False,
 			date_added=date.today())
 		task.save()
 		return Response(status=status.HTTP_200_OK)
@@ -30,14 +31,16 @@ def get_tasks(request):
 	return Response(data=tasks_serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['DELETE'])
-def delete_task(request, title):
-	print('title: ', title)
+def delete_task(request, id):
+	print('id: ', id)
 	try:
 		print('in try')
-		Task.objects.get(title=title).delete()
+		Task.objects.get(id=id).delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
 	except:
 		return Response(status=status.HTTP_400_BAD_REQUEST)
 
-# @api_view(['PATCH'])
-# def update_task(request):
+@api_view(['PATCH'])
+def update_task(request, id):
+	print('update: ',request.data, " id: ", id)
+	return Response(status=status.HTTP_200_OK);

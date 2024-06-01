@@ -3,3 +3,5 @@ backend/db.sqlite3
 backend/*/__pycache__
 backend/task/migrations
 .DS_Store
+frontend/package-lock.json
+

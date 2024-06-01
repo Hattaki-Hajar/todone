@@ -9,9 +9,8 @@ const Tasks = () => {
 			try {
 				const response = await fetch("http://127.0.0.1:8000/task/get/");
 				const data = await response.json();
-				// console.log(data);
 				setTasks(data);
-				// console.log("Success:", data.task);
+				console.log('data: ', data);
 			} catch (error) {
 				console.error("Error:", error);
 			}
