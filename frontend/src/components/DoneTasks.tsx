@@ -12,7 +12,7 @@ const DoneTasks = () => {
 						keep it up
 					</p>
 				</div>
-				<div className='w-[50%] h-[100%] text-blue-50 flex justify-center items-center'>
+				<div className='w-[50%] h-[50%] text-blue-50 flex justify-center items-center'>
 					<TaskCount />
 				</div>
 			</div>

@@ -5,12 +5,21 @@ import Header from './components/Header'
 import Tasks from './components/Tasks'
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-	const theme = createTheme({
+const theme = createTheme({
 	palette: {
 		primary: {
 		main: '#C17779',
 		},
 	},
+	// components: {
+	// 	MuiInputLabel: {
+	// 	  styleOverrides: {
+	// 		root: {
+	// 		  color: '#F7E3DB',
+	// 		},
+	// 	  },
+	// 	},
+	// },
 });
 
 function App() {

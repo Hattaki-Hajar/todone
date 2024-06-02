@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import TaskInfo from "./TaskInfo";
 import CircleIcon from '@mui/icons-material/Circle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import EditTask from "./EditTask";
 
 const Task: FC<{task:TaskInterface}> = ({task}) => {
 	const delete_task = async (id: string) => {
@@ -25,6 +26,7 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 
 	const [open, setOpen] = useState<boolean>(false);
 	const [done, setDone] = useState<boolean>(task.done);
+	const [edit, setEdit] = useState<boolean>(false);
 	const setProgress = async () => {
 		const data = {
 			'done': !task.done,
@@ -52,11 +54,12 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 	const changeDoneState = () => {
 		setProgress();
 		setDone(!done);
+		task.done = !done;
 	}
 
 	return (
 		<>
-			{!open && <div className='w-[80%] border-2 h-[40%] border-nude rounded-3xl bg-slate-950 flex items-center justify-between px-4'
+			{(!open && !edit) && <div className='w-[80%] border-2 h-[40%] border-nude rounded-3xl bg-slate-950 flex items-center justify-between px-4'
 				>
 				<div className='w-[90%] h-full font-bold text-nude hover:cursor-pointer flex items-center'>
 					{done ?
@@ -74,7 +77,7 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 				<div className='w-[10%] flex justify-end space-x-4'>
 					<PencilSquareIcon
 					className="h-6 w-6 text-nude_pink hover:cursor-pointer"
-					onClick={() => console.log("from edit icon")}
+					onClick={() => setEdit(true)}
 					/>
 					<TrashIcon
 					className="h-6 w-6 text-nude_pink hover:cursor-pointer"
@@ -85,6 +88,7 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 			}
 			<div className='w-[80%] flex items-center justify-center rounded-3xl bg-slate-950'>
 			{open && <TaskInfo task={task} open={open} setOpen={setOpen}/>}
+			{edit && <EditTask setEdit={setEdit} task={task}/>}
 			</div>
 		</>
 	)

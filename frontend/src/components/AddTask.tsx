@@ -32,17 +32,17 @@ const AddTask = () => {
 	return (
 		<div className='h-[30%] w-[90%] flex items-start flex-col px-20 space-y-4'>
 			<TextField
-			className='bg-nude rounded-sm'
+			className='bg-nude rounded-lg'
 			label="Title"
-			variant="standard"
+			variant="filled"
 			value={ title }
 			onChange={(e) => setTitle(e.target.value)}
 			/>
 			<div className='w-[90%] flex justify-between items-end'>
 				<TextField
-				className='bg-nude rounded-sm w-[90%]'
+				className='bg-nude rounded-lg w-[90%]'
 				label="Description"
-				variant="standard"
+				variant="filled"
 				value={ description }
 				onChange={ (e) => setDescription(e.target.value) }
 				/>

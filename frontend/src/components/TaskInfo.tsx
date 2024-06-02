@@ -16,7 +16,7 @@ const TaskInfo: FC<{task:TaskInterface, open:boolean, setOpen:any}> = ({ task, o
 		</div>
 		<div className="flex justify-between font-bold py-4">
 			{task.description}
-			{!task.done && <CheckIcon className="text-green-400 w-6"/>}
+			{task.done && <CheckIcon className="text-green-400 w-6"/>}
 		</div>
 	</div>
   )
