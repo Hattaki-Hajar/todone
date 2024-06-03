@@ -7,9 +7,10 @@ import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import EditTask from "./EditTask";
 
 const Task: FC<{task:TaskInterface}> = ({task}) => {
-	const delete_task = async (id: string) => {
+	const delete_task = async () => {
 		try {
-			const response = await fetch("http://127.0.0.1:8000/task/delete/" + id, {
+			const URL = "http://127.0.0.1:8000/task/delete/" + task.id + "/";
+			const response = await fetch(URL, {
 				method: 'DELETE',
 				mode: 'cors',
 			});
@@ -81,7 +82,7 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 					/>
 					<TrashIcon
 					className="h-6 w-6 text-nude_pink hover:cursor-pointer"
-					onClick={() => delete_task(task.id)}
+					onClick={() => delete_task()}
 					/>
 				</div>
 			</div>
