@@ -8,9 +8,9 @@ const Header = () => {
 			className='h-[80%] w-[7%] bg-nude rounded-full items-center'
 			src={cat}
 			/>
-			<h1 className='text-nude_pink font-bold text-6xl'>
+			<h1 className='text-nude_pink font-bold text-6xl sm:text-3xl'>
 				TO
-				<span className='text-nude font-bold text-6xl'>
+				<span className='text-nude font-bold text-6xl sm:text-3xl'>
 					DONE
 				</span>
 			</h1>

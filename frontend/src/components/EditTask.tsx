@@ -3,17 +3,18 @@ import { FC, useState } from "react"
 import { TextField } from "@mui/material";
 import Button from '@mui/material/Button';
 
-const EditTask:FC<{setEdit: any, task:TaskInterface}> = ({ setEdit, task }) => {
+const EditTask:FC<{setEdit: any, task:TaskInterface, setUpdate:any}>
+	= ({ setEdit, task, setUpdate }) => {
 	const [title, setTitle] = useState<string>('');
 	const [description, setDescription] = useState<string>('');
 
 	const sendUpdate = async() => {
 		const data = {
 			'title': title.length > 0 ? title : "",
-			'description': description.length > 0 ? title : "",
+			'description': description.length > 0 ? description : "",
 		};
 		try {
-			const URL = "http://127.0.0.1:8000/task/update/" + task.id;
+			const URL = "http://127.0.0.1:8000/task/update/" + task.id + '/';
 			const responce = await fetch(URL, {
 				method: 'PATCH',
 				mode: 'cors',
@@ -23,7 +24,7 @@ const EditTask:FC<{setEdit: any, task:TaskInterface}> = ({ setEdit, task }) => {
 				body: JSON.stringify(data),
 			});
 			if (responce.ok)
-				console.log('patch2 all good');
+				setUpdate(true);
 			else
 				console.log('patch2 failed');
 		}
@@ -60,7 +61,7 @@ const EditTask:FC<{setEdit: any, task:TaskInterface}> = ({ setEdit, task }) => {
 				<Button
 				className="hover:cursor-pointer"
 				variant="contained"
-				onClick={() => console.log('meh')}
+				onClick={sendUpdate}
 				disabled={!title.length && !description.length}
 				>
 					Submit

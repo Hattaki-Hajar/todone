@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useState, FC } from "react";
 
-const AddTask = () => {
+const AddTask:FC<{setUpdate: any}> = ({setUpdate}) => {
 	const [ title, setTitle ] = useState<string>('');
 	const [ description, setDescription ] = useState<string>('');
 	const sendData = async () => {
@@ -20,7 +20,7 @@ const AddTask = () => {
 				body: JSON.stringify(data)
 			});
 			if (response.ok)
-				console.log('all good');
+				setUpdate(true);
 			else
 				console.log('failed');
 		}

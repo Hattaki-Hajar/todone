@@ -6,7 +6,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import EditTask from "./EditTask";
 
-const Task: FC<{task:TaskInterface}> = ({task}) => {
+const Task: FC<{task:TaskInterface, setUpdate: any}> = ({task, setUpdate}) => {
 	const delete_task = async () => {
 		try {
 			const URL = "http://127.0.0.1:8000/task/delete/" + task.id + "/";
@@ -16,6 +16,7 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 			});
 			if (response.ok) {
 				console.log('Resource deleted successfully');
+				setUpdate(true);
 			} else {
 				const errorData = await response.json();
 				console.error('Failed to delete resource:', errorData);
@@ -43,7 +44,7 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 				body: JSON.stringify(data),
 			});
 			if (response.ok)
-				console.log('patch all good');
+				setUpdate(true)
 			else
 				console.log('patch failed');
 		}
@@ -60,7 +61,7 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 
 	return (
 		<>
-			{(!open && !edit) && <div className='w-[80%] border-2 h-[40%] border-nude rounded-3xl bg-slate-950 flex items-center justify-between px-4'
+			{(!open && !edit) && <div className='w-[80%] border-2 h-20 border-nude rounded-3xl bg-slate-950 flex items-center justify-between px-4'
 				>
 				<div className='w-[90%] h-full font-bold text-nude hover:cursor-pointer flex items-center'>
 					{done ?
@@ -75,13 +76,13 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 						{task.title}
 					</span>
 				</div>
-				<div className='w-[10%] flex justify-end space-x-4'>
+				<div className='flex justify-end space-x-4'>
 					<PencilSquareIcon
-					className="h-6 w-6 text-nude_pink hover:cursor-pointer"
+					className="text-nude_pink hover:cursor-pointer sm:w-7"
 					onClick={() => setEdit(true)}
 					/>
 					<TrashIcon
-					className="h-6 w-6 text-nude_pink hover:cursor-pointer"
+					className="text-nude_pink hover:cursor-pointer sm:w-7"
 					onClick={() => delete_task()}
 					/>
 				</div>
@@ -89,7 +90,7 @@ const Task: FC<{task:TaskInterface}> = ({task}) => {
 			}
 			<div className='w-[80%] flex items-center justify-center rounded-3xl bg-slate-950'>
 			{open && <TaskInfo task={task} open={open} setOpen={setOpen}/>}
-			{edit && <EditTask setEdit={setEdit} task={task}/>}
+			{edit && <EditTask setEdit={setEdit} task={task} setUpdate={setUpdate} />}
 			</div>
 		</>
 	)

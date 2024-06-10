@@ -44,16 +44,15 @@ def delete_task(request, id):
 def update_task(request, id):
 	data = request.data
 	print('update: ', data, " id: ", id)
-	# print('update: ', data['done'])
 	task = Task.objects.get(id=id)
 	if 'done' in data:
 		print('slaaay')
-		# task.done = data['done']
+		task.done = data['done']
 	if 'title' in data:
 		print('slay title')
-		# task.title = data['title']
+		task.title = data['title']
 	if 'description' in data:
 		print('slay description')
-		# task.description = data['description']
-	# task.save()
+		task.description = data['description']
+	task.save()
 	return Response(status=status.HTTP_200_OK);
